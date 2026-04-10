@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0eb9e64c4db64f219d477fa4e975469, type: 3}
+  m_Name: Compra_estante_chico
+  m_EditorClassIdentifier: Assembly-CSharp::MejoraData
+  nombreMejora: Estante de madera
+  precio: 100
+  prefabMejora: {fileID: 4232153132138164237, guid: ee77ec84527a548a5be8f1ded7488e9c, type: 3}
+  descripcion: 
