@@ -1,73 +1,65 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SistemaConstruccion : MonoBehaviour
 {
     [Header("Configuración")]
     public Camera camaraJugador;
-    public LayerMask capaSuelo; // Solo la capa del piso
+    public LayerMask capaSuelo;
     public float distanciaMaxima = 10f;
     public float velocidadRotacion = 20f;
+    public Material materialFantasma;
 
     private GameObject objetoFantasma;
     private bool estaConstruyendo = false;
+    private Material[] materialesOriginales;
 
     void Update()
     {
         if (!estaConstruyendo || objetoFantasma == null) return;
 
-        // 1. Raycast desde el centro de la pantalla al suelo
         Ray rayo = camaraJugador.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
         if (Physics.Raycast(rayo, out RaycastHit choque, distanciaMaxima, capaSuelo))
         {
-            // El objeto sigue el punto donde toca el rayo
             objetoFantasma.transform.position = choque.point;
 
-            // 2. Rotar con la ruedita del mouse
-            float rot = Input.mouseScrollDelta.y * velocidadRotacion;
+            float rot = Mouse.current.scroll.ReadValue().y * velocidadRotacion;
             objetoFantasma.transform.Rotate(Vector3.up, rot);
 
-            // 3. Confirmar con Clic Izquierdo
-            if (Input.GetMouseButtonDown(0))
-            {
+            if (Mouse.current.leftButton.wasPressedThisFrame)
                 ConfirmarColocacion();
-            }
         }
 
-        // 4. Cancelar con Clic Derecho
-        if (Input.GetMouseButtonDown(1))
-        {
+        if (Mouse.current.rightButton.wasPressedThisFrame)
             CancelarConstruccion();
-        }
     }
 
     public void IniciarConstruccion(MejoraData datos)
     {
-        // Instanciamos el objeto que queremos poner
         objetoFantasma = Instantiate(datos.prefabMejora);
 
-        // APAGAMOS temporalmente los scripts para que no hagan nada mientras los movemos
         MonoBehaviour[] scripts = objetoFantasma.GetComponentsInChildren<MonoBehaviour>();
         foreach (var s in scripts) s.enabled = false;
 
-        // Si tiene física, la congelamos
-        if (objetoFantasma.GetComponent<Rigidbody>())
+        if (objetoFantasma.GetComponent<Rigidbody>() != null)
             objetoFantasma.GetComponent<Rigidbody>().isKinematic = true;
 
+        AplicarMaterialFantasma();
         estaConstruyendo = true;
     }
 
     void ConfirmarColocacion()
     {
-        // RECTIVAMOS todo el comportamiento del objeto
+        RestaurarMateriales();
+
         MonoBehaviour[] scripts = objetoFantasma.GetComponentsInChildren<MonoBehaviour>();
         foreach (var s in scripts) s.enabled = true;
 
-        if (objetoFantasma.GetComponent<Rigidbody>())
+        if (objetoFantasma.GetComponent<Rigidbody>() != null)
             objetoFantasma.GetComponent<Rigidbody>().isKinematic = false;
 
-        // Lo mandamos a su carpeta en la Hierarchy
-        GameObject contenedor = GameObject.Find("__ESTANTERIAS__");
+        GameObject contenedor = GameObject.Find("__MUEBLES_INSTALADOS__");
         if (contenedor != null) objetoFantasma.transform.SetParent(contenedor.transform);
 
         objetoFantasma = null;
@@ -78,6 +70,32 @@ public class SistemaConstruccion : MonoBehaviour
     void CancelarConstruccion()
     {
         Destroy(objetoFantasma);
+        objetoFantasma = null;
         estaConstruyendo = false;
+    }
+
+    void AplicarMaterialFantasma()
+    {
+        if (materialFantasma == null) return;
+
+        Renderer[] renderers = objetoFantasma.GetComponentsInChildren<Renderer>();
+        materialesOriginales = new Material[renderers.Length];
+
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            materialesOriginales[i] = renderers[i].material;
+            renderers[i].material = materialFantasma;
+        }
+    }
+
+    void RestaurarMateriales()
+    {
+        if (materialFantasma == null || materialesOriginales == null) return;
+
+        Renderer[] renderers = objetoFantasma.GetComponentsInChildren<Renderer>();
+        for (int i = 0; i < renderers.Length && i < materialesOriginales.Length; i++)
+            renderers[i].material = materialesOriginales[i];
+
+        materialesOriginales = null;
     }
 }
