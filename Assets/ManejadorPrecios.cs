@@ -24,7 +24,7 @@ public class ManejadorPrecios : MonoBehaviour
         _logica.RegistrarItem(item.nombreProducto, item.precioBase);
 
     public float ObtenerPrecio(ItemData item) =>
-        _logica.ObtenerPrecio(item.nombreProducto);
+        _logica.ObtenerPrecio(item.nombreProducto, item.precioBase);
 
     public float ObtenerPrecioBase(ItemData item) =>
         _logica.ObtenerPrecioBase(item.nombreProducto);

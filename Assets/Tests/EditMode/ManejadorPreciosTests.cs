@@ -63,4 +63,13 @@ public class ManejadorPreciosTests
         var logica = Crear();
         Assert.DoesNotThrow(() => logica.SetPrecio("ItemInexistente", 10f));
     }
+
+    [Test]
+    public void ObtenerPrecio_ItemNoRegistrado_RetornaPrecioBase()
+    {
+        var logica = Crear();
+        float precioBase = 25f;
+        // "NuevoItem" never registered — fallback must be returned
+        Assert.AreEqual(precioBase, logica.ObtenerPrecio("NuevoItem", precioBase));
+    }
 }

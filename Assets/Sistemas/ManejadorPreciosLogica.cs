@@ -21,6 +21,12 @@ public class ManejadorPreciosLogica
         return _preciosVigentes.TryGetValue(nombre, out float precio) ? precio : 0f;
     }
 
+    // Retorna el precio vigente, o fallback si el ítem no está registrado.
+    public float ObtenerPrecio(string nombre, float fallback)
+    {
+        return _preciosVigentes.TryGetValue(nombre, out float precio) ? precio : fallback;
+    }
+
     public float ObtenerPrecioBase(string nombre)
     {
         return _preciosBase.TryGetValue(nombre, out float precio) ? precio : 0f;
