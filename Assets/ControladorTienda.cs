@@ -24,7 +24,7 @@ public class ControladorTienda : MonoBehaviour
         if (stockMerca.ContainsKey(item) && stockMerca[item] > 0)
         {
             stockMerca[item]--;
-            dineroCaja += item.precio;
+            dineroCaja += item.precioBase;
             Debug.Log($"Vendido {item.nombreProducto}. Caja: ${dineroCaja}");
             return true;
         }

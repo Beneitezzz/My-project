@@ -49,7 +49,7 @@ public class IA_Cliente : MonoBehaviour
                 if (elegida.Vender())
                 {
                     yaCompro = true;
-                    float precio = elegida.datosProducto.precio;
+                    float precio = elegida.datosProducto.precioBase;
                     Debug.Log($"Cliente agarró {elegida.datosProducto.nombreProducto}. Yendo a pagar...");
 
                     GameObject puntoM = GameObject.Find("PuntoAtencion");
