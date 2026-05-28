@@ -14,6 +14,7 @@ public class Estanteria : MonoBehaviour
     void Start()
     {
         if (cantidadActual > capacidadMaxima) cantidadActual = capacidadMaxima;
+        ManejadorPrecios.Instancia?.RegistrarItem(datosProducto);
     }
 
     public void Reponer(int cantidad)

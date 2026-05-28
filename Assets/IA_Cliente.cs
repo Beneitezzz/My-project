@@ -46,11 +46,26 @@ public class IA_Cliente : MonoBehaviour
 
                 yield return new WaitForSeconds(2f);
 
+                // Obtener precio vigente y generar presupuesto aleatorio del cliente
+                float precioVigente = ManejadorPrecios.Instancia != null
+                    ? ManejadorPrecios.Instancia.ObtenerPrecio(elegida.datosProducto)
+                    : elegida.datosProducto.precioBase;
+                float presupuesto = elegida.datosProducto.precioBase * Random.Range(0.8f, 2.0f);
+
+                if (precioVigente > presupuesto)
+                {
+                    Debug.Log($"Precio ${precioVigente:F1} supera el presupuesto del cliente (${presupuesto:F1}). Se retira.");
+                    IrseAFuera();
+                    yield return new WaitForSeconds(1f);
+                    while (agente.remainingDistance > 1f) yield return null;
+                    Destroy(gameObject);
+                    yield break;
+                }
+
                 if (elegida.Vender())
                 {
                     yaCompro = true;
-                    float precio = elegida.datosProducto.precioBase;
-                    Debug.Log($"Cliente agarró {elegida.datosProducto.nombreProducto}. Yendo a pagar...");
+                    Debug.Log($"Cliente agarró {elegida.datosProducto.nombreProducto} a ${precioVigente:F1}. Yendo a pagar...");
 
                     GameObject puntoM = GameObject.Find("PuntoAtencion");
                     if (puntoM != null)
@@ -61,7 +76,7 @@ public class IA_Cliente : MonoBehaviour
                         yield return new WaitForSeconds(1.5f);
 
                         ManejadorDinero economia = Object.FindAnyObjectByType<ManejadorDinero>();
-                        if (economia != null) economia.SumarVenta(precio);
+                        if (economia != null) economia.SumarVenta(precioVigente);
                     }
                 }
             }
