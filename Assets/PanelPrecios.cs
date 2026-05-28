@@ -17,8 +17,8 @@ public class PanelPrecios : MonoBehaviour
     {
         if (contenedorFilas == null || prefabFila == null) return;
 
-        foreach (Transform hijo in contenedorFilas)
-            Destroy(hijo.gameObject);
+        for (int i = contenedorFilas.childCount - 1; i >= 0; i--)
+            Destroy(contenedorFilas.GetChild(i).gameObject);
 
         // Recopilar ítems únicos de todas las estanterías activas en la escena
         Estanteria[] estanterias = Object.FindObjectsByType<Estanteria>(FindObjectsInactive.Exclude);
@@ -29,7 +29,9 @@ public class PanelPrecios : MonoBehaviour
         foreach (ItemData item in itemsUnicos)
         {
             GameObject filaGO = Instantiate(prefabFila, contenedorFilas);
-            filaGO.GetComponent<FilaPrecio>().Inicializar(item);
+            FilaPrecio fila = filaGO.GetComponent<FilaPrecio>();
+            if (fila == null) { Debug.LogError("prefabFila no tiene FilaPrecio", filaGO); continue; }
+            fila.Inicializar(item);
         }
     }
 }
