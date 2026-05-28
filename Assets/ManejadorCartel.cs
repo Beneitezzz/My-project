@@ -5,28 +5,47 @@ public class ManejadorCartel : MonoBehaviour
     public bool tiendaAbierta = false;
 
     [Header("Referencias Visuales")]
-    public GameObject objetoAbierto;  // El cubo VERDE
-    public GameObject objetoCerrado; // El cubo ROJO
+    public GameObject objetoAbierto;
+    public GameObject objetoCerrado;
 
-    public void AlternarTienda()
+    void Start()
     {
-        tiendaAbierta = !tiendaAbierta;
+        if (GameClock.Instancia != null)
+        {
+            GameClock.Instancia.OnAmanecer += AbrirTienda;
+            GameClock.Instancia.OnAnochecer += CerrarTienda;
 
-        // Aquí es donde te daba el error: ahora sí existe la función abajo
+            // Estado inicial sincronizado con el reloj
+            AlternarTienda(GameClock.Instancia.EsDeDia);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (GameClock.Instancia != null)
+        {
+            GameClock.Instancia.OnAmanecer -= AbrirTienda;
+            GameClock.Instancia.OnAnochecer -= CerrarTienda;
+        }
+    }
+
+    // Interacción manual del jugador (toggle)
+    public void AlternarTienda() => AlternarTienda(!tiendaAbierta);
+
+    // Control programático: GameClock, otros sistemas
+    public void AlternarTienda(bool abrir)
+    {
+        tiendaAbierta = abrir;
         ActualizarVisuales();
 
         if (!tiendaAbierta)
         {
-            // Versión limpia para Unity 6 que vimos antes
             IA_Cliente[] todosLosClientes = Object.FindObjectsByType<IA_Cliente>(FindObjectsInactive.Exclude);
             foreach (IA_Cliente cliente in todosLosClientes)
-            {
                 cliente.IrseAFuera();
-            }
         }
     }
 
-    // ESTA ES LA FUNCIÓN QUE TE FALTABA:
     void ActualizarVisuales()
     {
         if (objetoAbierto != null && objetoCerrado != null)
@@ -35,4 +54,7 @@ public class ManejadorCartel : MonoBehaviour
             objetoCerrado.SetActive(!tiendaAbierta);
         }
     }
+
+    private void AbrirTienda() => AlternarTienda(true);
+    private void CerrarTienda() => AlternarTienda(false);
 }
