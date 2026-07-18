@@ -11,6 +11,17 @@ public class Estanteria : MonoBehaviour
     public int cantidadActual;
     public bool necesitaReposicion;
 
+    void OnEnable()
+    {
+        RegistroPuntosInteres.Instancia.RegistrarEstanteria(this);
+    }
+
+    void OnDisable()
+    {
+        if (RegistroPuntosInteres.ExisteInstancia)
+            RegistroPuntosInteres.Instancia.DesregistrarEstanteria(this);
+    }
+
     void Start()
     {
         if (cantidadActual > capacidadMaxima) cantidadActual = capacidadMaxima;
