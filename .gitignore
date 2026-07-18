@@ -1,7 +1,66 @@
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
-/[Mm]emoryCaptures/
+# ============================================================
+# Unity — carpetas y archivos generados
+# ============================================================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+
+# Recorder / Addressables temporales
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Los .meta SIEMPRE se versionan (solo se ignoran si su asset también se ignora)
+!/[Aa]ssets/**/*.meta
+
+# ============================================================
+# Archivos de proyecto autogenerados (VS / Rider / MonoDevelop)
+# ============================================================
+ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Reporte de crash de Unity
+sysinfo.txt
+
+# Builds empaquetados
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# ============================================================
+# macOS
+# ============================================================
+.DS_Store
+**/.DS_Store
+
+# ============================================================
+# JetBrains Rider / IntelliJ
+# ============================================================
+.idea/
+**/.idea/
+*.iml
+
+# ============================================================
+# Preferencias de editor de ProBuilder (autogeneradas)
+# ============================================================
+/ProjectSettings/Packages/com.unity.probuilder/
