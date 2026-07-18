@@ -9,6 +9,10 @@ public class IA_Cliente : MonoBehaviour
     private bool haComenzado = false;
     public bool yaCompro = false;
 
+    [Header("Reacción al precio")]
+    public GloboReaccion globo;   // arrastrar el globo hijo del prefab en el Inspector
+    public float umbralGanga = 0.6f;
+
     void Awake()
     {
         agente = GetComponent<NavMeshAgent>();
@@ -51,6 +55,9 @@ public class IA_Cliente : MonoBehaviour
                     ? ManejadorPrecios.Instancia.ObtenerPrecio(elegida.datosProducto)
                     : elegida.datosProducto.precioBase;
                 float presupuesto = elegida.datosProducto.precioBase * Random.Range(0.8f, 2.0f);
+
+                NivelReaccion nivel = ReaccionPrecioLogica.Evaluar(precioVigente, presupuesto, umbralGanga);
+                if (globo != null) globo.Mostrar(nivel);
 
                 if (precioVigente > presupuesto)
                 {
