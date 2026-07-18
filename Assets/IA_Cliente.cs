@@ -32,14 +32,13 @@ public class IA_Cliente : MonoBehaviour
         if (esperando) yield break;
         esperando = true;
 
-        ManejadorCartel cartel = Object.FindAnyObjectByType<ManejadorCartel>();
+        ManejadorCartel cartel = ManejadorCartel.Instancia;
 
         if (cartel != null && cartel.tiendaAbierta && !yaCompro)
         {
-            Estanteria[] todas = Object.FindObjectsByType<Estanteria>(FindObjectsInactive.Exclude);
-            if (todas.Length > 0)
+            Estanteria elegida = RegistroPuntosInteres.Instancia.EstanteriaAlAzar();
+            if (elegida != null)
             {
-                Estanteria elegida = todas[Random.Range(0, todas.Length)];
 
                 Vector3 destino = elegida.puntoParaCliente != null
                     ? elegida.puntoParaCliente.position
@@ -74,15 +73,15 @@ public class IA_Cliente : MonoBehaviour
                     yaCompro = true;
                     Debug.Log($"Cliente agarró {elegida.datosProducto.nombreProducto} a ${precioVigente:F1}. Yendo a pagar...");
 
-                    GameObject puntoM = GameObject.Find("PuntoAtencion");
+                    Transform puntoM = RegistroPuntosInteres.Instancia.PuntoCajaMasCercano(transform.position);
                     if (puntoM != null)
                     {
-                        agente.SetDestination(puntoM.transform.position);
+                        agente.SetDestination(puntoM.position);
                         while (agente.pathPending || agente.remainingDistance > 0.6f) yield return null;
 
                         yield return new WaitForSeconds(1.5f);
 
-                        ManejadorDinero economia = Object.FindAnyObjectByType<ManejadorDinero>();
+                        ManejadorDinero economia = ManejadorDinero.Instancia;
                         if (economia != null) economia.SumarVenta(precioVigente);
                     }
                 }
@@ -102,11 +101,8 @@ public class IA_Cliente : MonoBehaviour
 
     public void IrseAFuera()
     {
-        GeneradorClientes gen = Object.FindAnyObjectByType<GeneradorClientes>();
-        if (gen != null && gen.puntosCalle.Length > 0)
-        {
-            Transform puntoAzar = gen.puntosCalle[Random.Range(0, gen.puntosCalle.Length)];
+        Transform puntoAzar = RegistroPuntosInteres.Instancia.CalleAlAzar();
+        if (puntoAzar != null)
             agente.SetDestination(puntoAzar.position);
-        }
     }
 }
