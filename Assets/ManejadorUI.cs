@@ -12,10 +12,6 @@ public class ManejadorUI : MonoBehaviour
     public ManejadorDinero sistemaDinero; // El que creamos antes
     private InventarioJugador inventario;
 
-    [Header("Ajustes del Ciclo Comercial")]
-    public float velocidadTiempo = 30f;
-    private float tiempoSimulado = 480f; // 8:00 AM
-
     void Start()
     {
         // Buscamos al jugador para saber qué tiene en la mano
@@ -36,8 +32,7 @@ public class ManejadorUI : MonoBehaviour
         // 2. Actualizar Inventario (qué tiene el jugador en la mano)
         ActualizarInventarioUI();
 
-        // 3. Hacer que el tiempo avance
-        tiempoSimulado += Time.deltaTime * velocidadTiempo / 60f;
+        // 3. Mostrar la hora del reloj real del juego (GameClock)
         ActualizarReloj();
     }
 
@@ -57,16 +52,22 @@ public class ManejadorUI : MonoBehaviour
 
     void ActualizarReloj()
     {
-        int totalMinutos = Mathf.FloorToInt(tiempoSimulado);
-        int horas = (totalMinutos / 60) % 24;
-        int minutos = totalMinutos % 60;
+        if (textoHora == null) return;
+
+        // Fuente única de verdad: el reloj real del juego. Si todavía no existe, mostramos algo neutro.
+        if (GameClock.Instancia == null)
+        {
+            textoHora.text = "--:--";
+            return;
+        }
+
+        float horaActual = GameClock.Instancia.HoraActual; // 0–24 (float)
+        int horas = Mathf.FloorToInt(horaActual) % 24;
+        int minutos = Mathf.FloorToInt((horaActual - Mathf.Floor(horaActual)) * 60f);
 
         string sufijo = (horas >= 12) ? "PM" : "AM";
         int horasDoce = (horas % 12 == 0) ? 12 : horas % 12;
 
-        if (textoHora != null)
-        {
-            textoHora.text = string.Format("{0:00}:{1:00} {2}", horasDoce, minutos, sufijo);
-        }
+        textoHora.text = string.Format("{0:00}:{1:00} {2}", horasDoce, minutos, sufijo);
     }
 }
