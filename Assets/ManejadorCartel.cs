@@ -2,11 +2,23 @@ using UnityEngine;
 
 public class ManejadorCartel : MonoBehaviour
 {
+    public static ManejadorCartel Instancia { get; private set; }
+
     public bool tiendaAbierta = false;
 
     [Header("Referencias Visuales")]
     public GameObject objetoAbierto;
     public GameObject objetoCerrado;
+
+    void Awake()
+    {
+        if (Instancia != null && Instancia != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instancia = this;
+    }
 
     void Start()
     {
@@ -22,6 +34,8 @@ public class ManejadorCartel : MonoBehaviour
 
     void OnDestroy()
     {
+        if (Instancia == this) Instancia = null;
+
         if (GameClock.Instancia != null)
         {
             GameClock.Instancia.OnAmanecer -= AbrirTienda;
