@@ -60,6 +60,17 @@ public class GameClockLogic
         }
     }
 
+    // Salta el reloj al amanecer (dormir): pone la hora en apertura, resetea los
+    // flags para que el próximo cierre vuelva a disparar OnAnochecer, y dispara OnAmanecer.
+    public void SaltarAAmanecer()
+    {
+        HoraActual = HoraApertura;
+        _horaEnteraAnterior = (int)HoraActual;
+        _amanecerDisparado = true;   // lo estamos disparando ahora
+        _anochecerDisparado = false; // que el próximo 20:00 dispare OnAnochecer
+        OnAmanecer?.Invoke();
+    }
+
     // Retorna true si el tiempo cruzó 'objetivo' al avanzar de 'anterior' a 'actual'.
     // Maneja el wrap de medianoche (ej: anterior=23.5, actual=0.5).
     private bool CruzoPorHora(float anterior, float actual, float objetivo)
