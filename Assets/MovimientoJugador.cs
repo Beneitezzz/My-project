@@ -104,6 +104,14 @@ public class MovimientoJugador : MonoBehaviour
                 return;
             }
 
+            // 3.5 Cama
+            Cama cama = choque.collider.GetComponentInParent<Cama>();
+            if (cama != null)
+            {
+                cama.Interactuar();
+                return;
+            }
+
             // 4. COMPUTADORA (PC) <--- CORREGIDO
             if (choque.collider.CompareTag("PC"))
             {
