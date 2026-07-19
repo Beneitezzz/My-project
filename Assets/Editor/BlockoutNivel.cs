@@ -263,11 +263,13 @@ public static class BlockoutNivel
         if (gen != null)
         {
             Undo.RecordObject(gen.transform, "Reubicar GeneradorClientes");
-            gen.transform.position = new Vector3(1f, 0.1f, 1.5f);
+            // X=5 (no X=1): el NavMesh deja un margen de ~0.5 m contra el borde del mundo y
+            // los escombros, así que un spawn pegado a la esquina oeste cae fuera de la malla.
+            gen.transform.position = new Vector3(5f, 0.1f, 1.5f);
         }
         else
         {
-            Debug.LogWarning("No encontré un GeneradorClientes en la escena. Cuando lo tengas, ubicalo en (1, 0.1, 1.5) para que los clientes entren por el oeste.");
+            Debug.LogWarning("No encontré un GeneradorClientes en la escena. Cuando lo tengas, ubicalo en (5, 0.1, 1.5) para que los clientes entren por el oeste, sobre el NavMesh.");
         }
     }
 }
