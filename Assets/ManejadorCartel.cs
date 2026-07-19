@@ -59,6 +59,12 @@ public class ManejadorCartel : MonoBehaviour
         tiendaAbierta = abrir;
         ActualizarVisuales();
 
+        // El reloj corre solo con la tienda abierta: cerrada = noche sin tiempo.
+        if (abrir)
+            GameClock.Instancia?.Reanudar();
+        else
+            GameClock.Instancia?.Pausar();
+
         if (!tiendaAbierta)
         {
             IA_Cliente[] todosLosClientes = Object.FindObjectsByType<IA_Cliente>(FindObjectsInactive.Exclude);
