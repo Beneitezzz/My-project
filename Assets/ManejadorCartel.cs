@@ -43,8 +43,15 @@ public class ManejadorCartel : MonoBehaviour
         }
     }
 
-    // Interacción manual del jugador (toggle)
-    public void AlternarTienda() => AlternarTienda(!tiendaAbierta);
+    // Interacción manual del jugador: solo puede CERRAR.
+    // Abrir es exclusivo del amanecer (OnAmanecer); una vez cerrada, queda cerrada hasta el próximo día.
+    public void AlternarTienda()
+    {
+        if (tiendaAbierta)
+            AlternarTienda(false);
+        else
+            Debug.Log("La tienda abre sola al amanecer; no se puede reabrir hasta el próximo día.");
+    }
 
     // Control programático: GameClock, otros sistemas
     public void AlternarTienda(bool abrir)
