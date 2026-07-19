@@ -18,6 +18,7 @@ public class GameClock : MonoBehaviour
     [SerializeField] private float duracionDiaSegundos = 480f; // 8 minutos por defecto
 
     private GameClockLogic _logica;
+    private bool _pausado;
 
     // Propiedades expuestas para que otros scripts lean el estado del reloj
     public float HoraActual   => _logica.HoraActual;
@@ -45,7 +46,16 @@ public class GameClock : MonoBehaviour
         _logica.OnAnochecer  += () => OnAnochecer?.Invoke();
     }
 
-    void Update() => _logica.Tick(Time.deltaTime);
+    void Update()
+    {
+        if (!_pausado) _logica.Tick(Time.deltaTime);
+    }
+
+    public void Pausar() => _pausado = true;
+    public void Reanudar() => _pausado = false;
+
+    // Dormir: salta al amanecer siguiente (dispara OnAmanecer → rebake + abre tienda).
+    public void Dormir() => _logica.SaltarAAmanecer();
 
     void OnDestroy()
     {
