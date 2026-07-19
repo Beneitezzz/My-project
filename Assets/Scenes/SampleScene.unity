@@ -292,6 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 171412307}
+  - component: {fileID: 171412308}
   m_Layer: 0
   m_Name: PuntoPaseo (1)
   m_TagString: Untagged
@@ -314,6 +315,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890978056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &171412308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171412306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1ca0e0872f14be090ce0f03040b73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuntoInteres
+  tipo: 2
 --- !u!1 &176440737
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +943,7 @@ Transform:
   - {fileID: 2070038841}
   - {fileID: 176440739}
   - {fileID: 890978056}
+  - {fileID: 669353956}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &501726352
@@ -1152,6 +1167,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590367467}
   m_CullTransparentMesh: 1
+--- !u!1 &669353955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 669353956}
+  - component: {fileID: 669353957}
+  m_Layer: 0
+  m_Name: GameClock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &669353956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669353955}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 439065214}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &669353957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669353955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e134adaf0455d49f88513c871194a95a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameClock::GameClock
+  horaInicial: 8
+  horaApertura: 8
+  horaCierre: 20
+  duracionDiaSegundos: 30
 --- !u!1 &670636132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,6 +1920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1101382680}
+  - component: {fileID: 1101382681}
   m_Layer: 0
   m_Name: PuntoEntrada
   m_TagString: Untagged
@@ -1879,6 +1943,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 439065214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1101382681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101382679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1ca0e0872f14be090ce0f03040b73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuntoInteres
+  tipo: 0
 --- !u!1 &1141426926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,6 +1965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1141426927}
+  - component: {fileID: 1141426928}
   m_Layer: 0
   m_Name: PuntoPaseo (3)
   m_TagString: Untagged
@@ -1910,6 +1988,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890978056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1141426928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141426926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1ca0e0872f14be090ce0f03040b73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuntoInteres
+  tipo: 2
 --- !u!1 &1154780423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,6 +2239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1167899790}
+  - component: {fileID: 1167899791}
   m_Layer: 0
   m_Name: PuntoPaseo
   m_TagString: Untagged
@@ -2170,6 +2262,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890978056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1167899791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167899789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1ca0e0872f14be090ce0f03040b73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuntoInteres
+  tipo: 2
 --- !u!1 &1338499477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,13 +2632,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeneradorClientes
   prefabCliente: {fileID: 8305254979797501905, guid: ccde408fded7d4df39997d836fd740d6, type: 3}
-  puntoEntradaTienda: {fileID: 1101382680}
-  puntosCalle:
-  - {fileID: 1167899790}
-  - {fileID: 171412307}
-  - {fileID: 1970292204}
-  - {fileID: 1141426927}
-  - {fileID: 1841012299}
   tiempoEntreClientes: 5
   delayInicial: 2
 --- !u!4 &1597115085
@@ -2550,6 +2648,50 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 439065214}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1684012298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1684012300}
+  - component: {fileID: 1684012299}
+  m_Layer: 0
+  m_Name: RegistroPuntosInteres
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1684012299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684012298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c2bb64f0ec4b7fa7e21817f331bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RegistroPuntosInteres
+--- !u!4 &1684012300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684012298}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.07086, y: 0.88422, z: -10.03569}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1739062454
 GameObject:
@@ -2681,6 +2823,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 898809717}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1746280148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1746280150}
+  - component: {fileID: 1746280149}
+  m_Layer: 0
+  m_Name: RehorneadorNavMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1746280149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746280148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa24bb11fbf0f446ba7d9db8a67ddd1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RehorneadorNavMesh
+  superficie: {fileID: 586761789}
+--- !u!4 &1746280150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746280148}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1775557938
 GameObject:
   m_ObjectHideFlags: 0
@@ -2803,6 +2990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1841012299}
+  - component: {fileID: 1841012300}
   m_Layer: 0
   m_Name: PuntoAtencion
   m_TagString: Mostrador
@@ -2825,6 +3013,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890978056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1841012300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841012298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1ca0e0872f14be090ce0f03040b73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuntoInteres
+  tipo: 1
 --- !u!1 &1878443265
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,7 +3175,6 @@ GameObject:
   - component: {fileID: 1883755479}
   - component: {fileID: 1883755478}
   - component: {fileID: 1883755477}
-  - component: {fileID: 1883755476}
   m_Layer: 0
   m_Name: VisualCartel_abierto
   m_TagString: Untagged
@@ -2997,21 +3197,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1414330385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1883755476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883755474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffd3d57e2b128411c82117a847ef943a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ControladorCartel
-  tiendaAbierta: 0
-  objetoAbierto: {fileID: 1883755474}
-  objetoCerrado: {fileID: 436949370}
 --- !u!65 &1883755477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3099,6 +3284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1970292204}
+  - component: {fileID: 1970292205}
   m_Layer: 0
   m_Name: PuntoPaseo (2)
   m_TagString: Untagged
@@ -3121,6 +3307,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890978056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1970292205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970292203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1ca0e0872f14be090ce0f03040b73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuntoInteres
+  tipo: 2
 --- !u!1 &2069535573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,3 +3560,5 @@ SceneRoots:
   - {fileID: 898809717}
   - {fileID: 439065214}
   - {fileID: 1483249109}
+  - {fileID: 1684012300}
+  - {fileID: 1746280150}

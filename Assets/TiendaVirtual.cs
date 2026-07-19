@@ -11,6 +11,12 @@ public class TiendaVirtual : MonoBehaviour
 
     public void ComprarMejora(MejoraData datos)
     {
+        if (ManejadorCartel.Instancia != null && ManejadorCartel.Instancia.tiendaAbierta)
+        {
+            Debug.Log("No podés remodelar con la tienda abierta. Cerrá la tienda primero.");
+            return;
+        }
+
         Debug.Log("Intentando comprar: " + datos.nombreMejora); // <--- DEBUG 1
 
         if (economia.dineroActual >= datos.precio)

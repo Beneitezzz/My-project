@@ -5,10 +5,6 @@ public class GeneradorClientes : MonoBehaviour
     [Header("Prefabs")]
     public GameObject prefabCliente;
 
-    [Header("Puntos de Navegación")]
-    public Transform puntoEntradaTienda;
-    public Transform[] puntosCalle;
-
     [Header("Ajustes de Tiempo")]
     public float tiempoEntreClientes = 5f;
     public float delayInicial = 2f;
@@ -40,12 +36,20 @@ public class GeneradorClientes : MonoBehaviour
     {
         GameObject nuevoCliente = Instantiate(prefabCliente, transform.position, Quaternion.identity);
         IA_Cliente scriptIA = nuevoCliente.GetComponent<IA_Cliente>();
-        ManejadorCartel cartel = Object.FindAnyObjectByType<ManejadorCartel>();
 
-        if (cartel != null && cartel.tiendaAbierta)
-            scriptIA.IrALaTienda(puntoEntradaTienda);
-        else if (puntosCalle.Length > 0)
-            scriptIA.PasearPorFuera(puntosCalle[Random.Range(0, puntosCalle.Length)]);
+        var registro = RegistroPuntosInteres.Instancia;
+        bool abierta = ManejadorCartel.Instancia != null && ManejadorCartel.Instancia.tiendaAbierta;
+
+        if (abierta)
+        {
+            Transform entrada = registro.EntradaAlAzar();
+            if (entrada != null) scriptIA.IrALaTienda(entrada);
+        }
+        else
+        {
+            Transform calle = registro.CalleAlAzar();
+            if (calle != null) scriptIA.PasearPorFuera(calle);
+        }
     }
 
     private void PausarSpawn() => CancelInvoke(nameof(AparecerCliente));
