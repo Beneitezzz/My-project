@@ -8,13 +8,15 @@ public class RehorneadorNavMesh : MonoBehaviour
     [Tooltip("El NavMeshSurface que cubre la tienda")]
     public NavMeshSurface superficie;
 
-    void OnEnable()
+    void Start()
     {
         if (GameClock.Instancia != null)
             GameClock.Instancia.OnAmanecer += Rehornear;
+        else
+            Debug.LogWarning("RehorneadorNavMesh: no hay GameClock en la escena; el re-horneado al amanecer no correrá.");
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         if (GameClock.Instancia != null)
             GameClock.Instancia.OnAmanecer -= Rehornear;
@@ -24,5 +26,7 @@ public class RehorneadorNavMesh : MonoBehaviour
     {
         if (superficie != null)
             superficie.BuildNavMesh();
+        else
+            Debug.LogWarning("RehorneadorNavMesh: 'superficie' sin asignar; no se puede re-hornear.");
     }
 }
