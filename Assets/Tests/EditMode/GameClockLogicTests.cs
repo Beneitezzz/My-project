@@ -125,4 +125,40 @@ public class GameClockLogicTests
 
         Assert.AreEqual(2, disparosAnochecer, "OnAnochecer debe dispararse una vez por ciclo de día");
     }
+
+    [Test]
+    public void SaltarAAmanecer_PoneHoraEnApertura()
+    {
+        var reloj = Crear(horaInicial: 15f);
+        reloj.SaltarAAmanecer();
+        Assert.AreEqual(8f, reloj.HoraActual); // HoraApertura por defecto = 8
+    }
+
+    [Test]
+    public void SaltarAAmanecer_DisparaOnAmanecer()
+    {
+        var reloj = Crear(horaInicial: 15f);
+        int disparos = 0;
+        reloj.OnAmanecer += () => disparos++;
+
+        reloj.SaltarAAmanecer();
+
+        Assert.AreEqual(1, disparos);
+    }
+
+    [Test]
+    public void SaltarAAmanecer_ReseteaFlags_ProximoCierreDispara()
+    {
+        // Cerramos el dia (OnAnochecer 1), dormimos, y el cierre del dia nuevo
+        // debe volver a disparar OnAnochecer.
+        var reloj = Crear(horaInicial: 19.9f);
+        int cierres = 0;
+        reloj.OnAnochecer += () => cierres++;
+
+        reloj.Tick(0.5f);        // 19.9 -> 20.4  → OnAnochecer (1)
+        reloj.SaltarAAmanecer(); // dormir → 8:00
+        reloj.Tick(12f);         // 8.0 -> 20.0   → OnAnochecer (2)
+
+        Assert.AreEqual(2, cierres, "Tras dormir, el cierre del dia nuevo debe volver a disparar OnAnochecer");
+    }
 }
